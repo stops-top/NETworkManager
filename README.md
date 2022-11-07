@@ -1,6 +1,5 @@
 <div align="center">
-  <img alt="NETworkManager Preview" src="https://github.com/BornToBeRoot/NETworkManager/blob/main/Images/NETworkManager_128x128.png?raw=true" />
-  <h1>NETworkManager</h1>
+  <h1>NetworkStudio</h1>
   <p>
     <b>A powerful tool for managing networks and troubleshoot network problems!</b>
   </p>
@@ -46,46 +45,10 @@
   </p>
 </div>
 
-<img alt="NETworkManager Preview" src="https://github.com/BornToBeRoot/NETworkManager/blob/main/docs/Preview.gif?raw=true" />
 
-## 📦 Download
 
-Prebuilt binaries (setup, portable and archive) are available on the [download page](https://borntoberoot.net/NETworkManager/Download). Here you will also find the system requirements and how to install the application silent. The files are provided via [GitHub releases](https://github.com/BornToBeRoot/NETworkManager/releases/latest).
 
-In addition, NETworkManager is available through the package managers [Chocolatey](https://chocolatey.org/packages/NETworkManager), [WinGet](https://github.com/microsoft/winget-pkgs/tree/master/manifests/b/BornToBeRoot/NETworkManager/) and [Evergreen](https://stealthpuppy.com/evergreen/apps/):
 
-```PowerShell
-# Chocolatey
-choco install networkmanager
-
-# WinGet
-winget install BornToBeRoot.NETworkManager
-
-# Evergreen
-Get-EvergreenApp -Name NETworkManager | Save-EvergreenApp -Path C:\Users\$env:Username\Downloads\
-```
-
-## 📃 Changelog
-
-You can find the changelog for each version [here](https://borntoberoot.net/NETworkManager/Changelog).
-
-## 📖 Documentation
-
-The documentation is provided via GitHub pages and can be found [here](https://borntoberoot.net/NETworkManager/Documentation).
-
-## ✨ Contributing
-
-Here you will find ways to contribute:
-
-- [Request a feature, report a bug or ask a question](CONTRIBUTING.md#contributing)
-- [Add a feature or fix a bug](CONTRIBUTING.md#code)
-- [Add or improve a translation](CONTRIBUTING.md#translation)
-- [Improve the documentation](CONTRIBUTING.md#documentation)
-- [Report a security vulnerability](https://github.com/BornToBeRoot/NETworkManager/blob/main/SECURITY.md)
-
-A list of all contributors can be found [here](https://github.com/BornToBeRoot/NETworkManager/blob/main/Contributors.md).
-
-This project has adopted the [code of conduct](https://github.com/BornToBeRoot/NETworkManager/blob/main/CODE_OF_CONDUCT.md) defined by the [Contributor Covenant](http://contributor-covenant.org/).
 
 ## 🔧 Build
 
@@ -114,7 +77,3 @@ Alternatively the `build.ps1` script can be used to create the binaries.
 ```PowerShell
 git clone https://github.com/BornToBeRoot/NETworkManager; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\NETworkManager\build.ps1
 ```
-
-## 📝 License
-
-NETworkManager is published under the [GNU General Public License v3](https://github.com/BornToBeRoot/NETworkManager/blob/main/LICENSE). The licenses of the used libraries can be found [here](https://github.com/BornToBeRoot/NETworkManager/tree/main/Source/NETworkManager.Documentation/Licenses).

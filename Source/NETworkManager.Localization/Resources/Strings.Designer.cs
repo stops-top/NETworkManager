@@ -7014,11 +7014,11 @@ namespace NETworkManager.Localization.Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Report an issue or create a feature request ähnelt.
         /// </summary>
-        public static string ReportAnIssueOrCreateAFeatureRequest {
-            get {
-                return ResourceManager.GetString("ReportAnIssueOrCreateAFeatureRequest", resourceCulture);
-            }
-        }
+        // public static string ReportAnIssueOrCreateAFeatureRequest {
+        //     get {
+        //         return ResourceManager.GetString("ReportAnIssueOrCreateAFeatureRequest", resourceCulture);
+        //     }
+        // }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Report on GitHub ähnelt.
@@ -7945,11 +7945,11 @@ namespace NETworkManager.Localization.Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Star/Fork the Project on GitHub ähnelt.
         /// </summary>
-        public static string StarForkTheProjectOnGitHub {
-            get {
-                return ResourceManager.GetString("StarForkTheProjectOnGitHub", resourceCulture);
-            }
-        }
+        // public static string StarForkTheProjectOnGitHub {
+        //     get {
+        //         return ResourceManager.GetString("StarForkTheProjectOnGitHub", resourceCulture);
+        //     }
+        // }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start minimized in tray ähnelt.

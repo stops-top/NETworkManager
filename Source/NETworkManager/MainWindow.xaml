@@ -147,7 +147,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Command="{Binding OpenWebsiteCommand}" ToolTip="{x:Static localization:Strings.StarForkTheProjectOnGitHub}" CommandParameter="{x:Static resources:Resources.NETworkManager_RepoUrl}" Cursor="Hand">
+                <!-- <Button Command="{Binding OpenWebsiteCommand}" ToolTip="{x:Static localization:Strings.StarForkTheProjectOnGitHub}" CommandParameter="{x:Static resources:Resources.NETworkManager_RepoUrl}" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                             <Rectangle.OpacityMask>
@@ -155,8 +155,8 @@
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </StackPanel>
-                </Button>
-                <Button Command="{Binding OpenWebsiteCommand}" ToolTip="{x:Static localization:Strings.ReportAnIssueOrCreateAFeatureRequest}" CommandParameter="{x:Static resources:Resources.NETworkManager_NewIssueUrl}" Cursor="Hand">
+                </Button> -->
+                <!-- <Button Command="{Binding OpenWebsiteCommand}" ToolTip="{x:Static localization:Strings.ReportAnIssueOrCreateAFeatureRequest}" CommandParameter="{x:Static resources:Resources.NETworkManager_NewIssueUrl}" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20"  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">                            
                             <Rectangle.OpacityMask>
@@ -164,7 +164,7 @@
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </StackPanel>
-                </Button>
+                </Button> -->
                 <Button Command="{Binding OpenDocumentationCommand}" ToolTip="{x:Static localization:Strings.OpenDocumentation}" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">

@@ -16,9 +16,9 @@
 		<StartupObject>NETworkManager.App</StartupObject>
 		<ApplicationIcon>NETworkManager.ico</ApplicationIcon>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<Authors>BornToBeRoot</Authors>
-		<PackageProjectUrl>https://github.com/BornToBeRoot/NETworkManager</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/BornToBeRoot/NETworkManager</RepositoryUrl>
+		<Authors>Qitas</Authors>
+		<PackageProjectUrl>https://github.com/stops-top/NetworkStudio</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/stops-top/NetworkStudio</RepositoryUrl>
 		<PackageLicenseFile>NETworkManager.txt</PackageLicenseFile>
 		<PackageIcon>NETworkManager.ico</PackageIcon>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>

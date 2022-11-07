@@ -1,0 +1,533 @@
+<Project>
+  <PropertyGroup>
+    <AssemblyName>NETworkManager</AssemblyName>
+    <IntermediateOutputPath>obj\Debug\</IntermediateOutputPath>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>E:\NetworkStudio\Source\NETworkManager\obj\</MSBuildProjectExtensionsPath>
+    <_TargetAssemblyProjectName>NETworkManager</_TargetAssemblyProjectName>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <!--
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishReadyToRun>true</PublishReadyToRun>
+		-->
+    <CsWinRTWindowsMetadata>sdk</CsWinRTWindowsMetadata>
+    <RootNamespace>NETworkManager</RootNamespace>
+    <AssemblyName>NETworkManager</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>NETworkManager.App</StartupObject>
+    <ApplicationIcon>NETworkManager.ico</ApplicationIcon>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Authors>Qitas</Authors>
+    <PackageProjectUrl>https://github.com/stops-top/NetworkStudio</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/stops-top/NetworkStudio</RepositoryUrl>
+    <PackageLicenseFile>NETworkManager.txt</PackageLicenseFile>
+    <PackageIcon>NETworkManager.ico</PackageIcon>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Description>A powerful tool for managing networks and troubleshoot network problems!</Description>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="log4net.config" />
+    <None Remove="NETworkManager.ico" />
+    <None Remove="SplashScreen.png" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="NETworkManager.ico">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
+  </ItemGroup>
+  <!-- Target 6.0.0 for compatibility https://github.com/dotnet/core/issues/7176 -->
+  <ItemGroup>
+    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms" TargetingPackVersion="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AirspaceFixer" Version="1.0.6" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.102.1" />
+    <PackageReference Include="DnsClient" Version="1.7.0" />
+    <PackageReference Include="Dragablz" Version="0.0.3.234" />
+    <PackageReference Include="IPNetwork2" Version="2.6.482" />
+    <PackageReference Include="Lextm.SharpSnmpLib" Version="12.5.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="LoadingIndicators.WPF" Version="0.0.1" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1418.22" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.7" />
+    <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NETworkManager.Controls\NETworkManager.Controls.csproj" />
+    <ProjectReference Include="..\NETworkManager.Converters\NETworkManager.Converters.csproj" />
+    <ProjectReference Include="..\NETworkManager.Documentation\NETworkManager.Documentation.csproj" />
+    <ProjectReference Include="..\NETworkManager.Localization\NETworkManager.Localization.csproj" />
+    <ProjectReference Include="..\NETworkManager.Models\NETworkManager.Models.csproj" />
+    <ProjectReference Include="..\NETworkManager.Profiles\NETworkManager.Profiles.csproj" />
+    <ProjectReference Include="..\NETworkManager.Settings\NETworkManager.Settings.csproj" />
+    <ProjectReference Include="..\NETworkManager.Update\NETworkManager.Update.csproj" />
+    <ProjectReference Include="..\NETworkManager.Utilities.WPF\NETworkManager.Utilities.WPF.csproj" />
+    <ProjectReference Include="..\NETworkManager.Utilities\NETworkManager.Utilities.csproj" />
+    <ProjectReference Include="..\NETworkManager.Validators\NETworkManager.Validators.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="PowerShell.exe -ExecutionPolicy Bypass -NoProfile -File &quot;$(ProjectDir)..\..\Scripts\PreBuildEventCommandLine.ps1&quot; &quot;$(TargetDir)&quot;" />
+  </Target>
+  <ItemGroup>
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\Accessibility.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\airspacefixer\1.0.6\lib\net6.0-windows7.0\AirspaceFixer.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\awssdk.core\3.7.100.8\lib\netcoreapp3.1\AWSSDK.Core.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\awssdk.ec2\3.7.102.1\lib\netcoreapp3.1\AWSSDK.EC2.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\AxMSTSCLib.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\controlzex\4.4.0\lib\netcoreapp3.1\ControlzEx.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\dnsclient\1.7.0\lib\net6.0\DnsClient.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\dragablz\0.0.3.234\lib\netcoreapp3.0\Dragablz.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\livecharts\0.9.7\lib\net45\LiveCharts.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\livecharts.wpf\0.9.7\lib\net45\LiveCharts.Wpf.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\loadingindicators.wpf\0.0.1\lib\LoadingIndicators.WPF.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\log4net\2.0.15\lib\netstandard2.0\log4net.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro\2.4.9\lib\netcoreapp3.1\MahApps.Metro.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.BootstrapIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.BoxIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Codicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Coolicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Core.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Entypo.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.EvaIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.FeatherIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.FileIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Fontaudio.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.FontAwesome.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Fontisto.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.ForkAwesome.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Ionicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.JamIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Material.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.MaterialDesign.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.MaterialLight.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Microns.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Modern.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Octicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.PicolIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.PixelartIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.RadixIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.RemixIcon.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.RPGAwesome.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.SimpleIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Typicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Unicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.VaadinIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.WeatherIcons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\mahapps.metro.iconpacks\4.11.0\lib\net5.0-windows7.0\MahApps.Metro.IconPacks.Zondicons.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\markdig.signed\0.22.0\lib\netcoreapp3.1\Markdig.Signed.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.applicationinsights\2.21.0\lib\netstandard2.0\Microsoft.ApplicationInsights.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.bcl.asyncinterfaces\5.0.0\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.codeanalysis.csharp\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.codeanalysis.common\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.extensions.objectpool\5.0.10\lib\net5.0\Microsoft.Extensions.ObjectPool.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.management.infrastructure\2.0.0\ref\netstandard1.6\Microsoft.Management.Infrastructure.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.management.infrastructure\2.0.0\ref\netstandard1.6\Microsoft.Management.Infrastructure.Native.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.powershell.sdk\7.2.7\ref\net6.0\Microsoft.PowerShell.Commands.Utility.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.powershell.sdk\7.2.7\ref\net6.0\Microsoft.PowerShell.ConsoleHost.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.powershell.markdownrender\7.2.0\lib\netstandard2.0\Microsoft.PowerShell.MarkdownRender.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\Microsoft.VisualBasic.Core.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\Microsoft.VisualBasic.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\Microsoft.VisualBasic.Forms.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.web.webview2\1.0.1418.22\lib\netcoreapp3.0\Microsoft.Web.WebView2.Core.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.web.webview2\1.0.1418.22\lib\netcoreapp3.0\Microsoft.Web.WebView2.WinForms.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.web.webview2\1.0.1418.22\lib\netcoreapp3.0\Microsoft.Web.WebView2.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\Microsoft.Win32.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\Microsoft.Win32.Registry.AccessControl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\Microsoft.Win32.Registry.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\Microsoft.Win32.SystemEvents.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.17763.27\lib\net6.0\Microsoft.Windows.SDK.NET.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.39\lib\net5.0-windows7.0\Microsoft.Xaml.Behaviors.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\mscorlib.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\MSTSCLib.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\namotion.reflection\2.0.3\lib\netstandard2.0\Namotion.Reflection.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\netstandard.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Controls\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Controls.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Converters\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Converters.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Documentation\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Documentation.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Localization\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Localization.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Models\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Models.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Profiles\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Profiles.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Settings\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Settings.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Update\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Update.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Utilities\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Utilities.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Utilities.WPF\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Utilities.WPF.dll" />
+    <ReferencePath Include="E:\NetworkStudio\Source\NETworkManager.Validators\bin\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager.Validators.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\njsonschema\10.5.2\lib\netstandard2.0\NJsonSchema.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\octokit\4.0.1\lib\netstandard2.0\Octokit.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.Aero.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.Aero2.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.AeroLite.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.Classic.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.Luna.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationFramework.Royale.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\PresentationUI.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\ReachFramework.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\lextm.sharpsnmplib\12.5.0\lib\net6.0\SharpSnmpLib.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.AppContext.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Buffers.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.CodeDom.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Collections.Concurrent.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Collections.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Collections.Immutable.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Collections.NonGeneric.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Collections.Specialized.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.Annotations.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.componentmodel.composition\6.0.0\lib\net6.0\System.ComponentModel.Composition.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.componentmodel.composition.registration\6.0.0\lib\net6.0\System.ComponentModel.Composition.Registration.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.EventBasedAsync.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ComponentModel.TypeConverter.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Configuration.ConfigurationManager.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Console.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Data.Common.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Data.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.data.odbc\6.0.0\lib\net6.0\System.Data.Odbc.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.data.oledb\6.0.0\lib\net6.0\System.Data.OleDb.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.data.sqlclient\4.8.3\ref\netcoreapp2.1\System.Data.SqlClient.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Design.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.Contracts.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.Debug.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.DiagnosticSource.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.EventLog.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.FileVersionInfo.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.PerformanceCounter.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.Process.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.StackTrace.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.TextWriterTraceListener.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.Tools.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.TraceSource.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Diagnostics.Tracing.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.directoryservices.accountmanagement\6.0.0\lib\net6.0\System.DirectoryServices.AccountManagement.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.DirectoryServices.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.directoryservices.protocols\6.0.0\lib\net6.0\System.DirectoryServices.Protocols.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Drawing.Common.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Drawing.Design.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Drawing.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Dynamic.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Formats.Asn1.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Globalization.Calendars.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Globalization.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Globalization.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Compression.Brotli.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Compression.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Compression.FileSystem.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Compression.ZipFile.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.FileSystem.AccessControl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.FileSystem.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.FileSystem.DriveInfo.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.FileSystem.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.FileSystem.Watcher.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.IsolatedStorage.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.MemoryMappedFiles.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.IO.Packaging.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Pipes.AccessControl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.Pipes.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.io.ports\6.0.0\lib\net6.0\System.IO.Ports.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.IO.UnmanagedMemoryStream.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Linq.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Linq.Expressions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Linq.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Linq.Queryable.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.management.automation\7.2.7\ref\net6.0\System.Management.Automation.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.management\6.0.0\lib\net6.0\System.Management.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Memory.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Http.Json.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.net.http.winhttphandler\6.0.1\lib\net6.0\System.Net.Http.WinHttpHandler.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.HttpListener.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\ipnetwork2\2.6.482\lib\net6.0\System.Net.IPNetwork.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Mail.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.NameResolution.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.NetworkInformation.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Ping.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Requests.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Security.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.ServicePoint.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.Sockets.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.WebClient.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.WebHeaderCollection.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.WebProxy.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.WebSockets.Client.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Net.WebSockets.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Numerics.Vectors.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ObjectModel.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Printing.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.reflection.context\6.0.0\lib\net6.0\System.Reflection.Context.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.DispatchProxy.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Emit.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Emit.ILGeneration.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Emit.Lightweight.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Metadata.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Reflection.TypeExtensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Resources.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Resources.Reader.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Resources.ResourceManager.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Resources.Writer.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.runtime.caching\6.0.0\lib\net6.0\System.Runtime.Caching.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.CompilerServices.VisualC.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Handles.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.InteropServices.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Intrinsics.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Loader.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Serialization.Formatters.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Serialization.Json.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Serialization.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Runtime.Serialization.Xml.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.AccessControl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Claims.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Algorithms.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Cng.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Csp.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.OpenSsl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Pkcs.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.ProtectedData.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.X509Certificates.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Security.Cryptography.Xml.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Security.Permissions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Principal.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.Principal.Windows.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Security.SecureString.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.primitives\4.9.0\ref\net6.0\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.duplex\4.9.0\ref\net6.0\System.ServiceModel.Duplex.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.http\4.9.0\ref\net6.0\System.ServiceModel.Http.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.nettcp\4.9.0\ref\net6.0\System.ServiceModel.NetTcp.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.primitives\4.9.0\ref\net6.0\System.ServiceModel.Primitives.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.security\4.9.0\ref\net6.0\System.ServiceModel.Security.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.servicemodel.syndication\6.0.0\lib\net6.0\System.ServiceModel.Syndication.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ServiceModel.Web.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ServiceProcess.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.serviceprocess.servicecontroller\6.0.0\lib\net6.0\System.ServiceProcess.ServiceController.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.speech\6.0.0\lib\net6.0\System.Speech.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.Encoding.CodePages.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.Encoding.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.Encodings.Web.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.Json.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Text.RegularExpressions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Threading.AccessControl.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Channels.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Overlapped.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Tasks.Dataflow.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Tasks.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Tasks.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Tasks.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Thread.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.ThreadPool.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Threading.Timer.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Transactions.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Transactions.Local.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.ValueTuple.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Web.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Web.HttpUtility.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\system.web.services.description\4.9.0\lib\netstandard2.0\System.Web.Services.Description.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Windows.Controls.Ribbon.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Windows.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Windows.Extensions.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Windows.Forms.Design.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Windows.Forms.Design.Editors.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\System.Windows.Forms.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Windows.Input.Manipulations.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Windows.Presentation.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.ReaderWriter.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.XDocument.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.XmlDocument.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.XmlSerializer.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.XPath.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\ref\net6.0\System.Xml.XPath.XDocument.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\UIAutomationClient.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\UIAutomationClientSideProviders.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.11\ref\net6.0\WindowsBase.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\ref\net6.0\WindowsFormsIntegration.dll" />
+    <ReferencePath Include="C:\Users\tangqi\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.17763.27\lib\net6.0\WinRT.Runtime.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\CommandLineWindow.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\AWSSessionManagerControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\DragablzTabHostWindow.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\LvlChartsBandwidthTooltip.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\LvlChartsPingTimeTooltip.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\LvlChartsWiFiChannelTooltip.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\PowerShellControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\PuTTYControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\RemoteDesktopControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\TightVNCControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Controls\WebConsoleControl.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\MainWindow.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\StatusWindow.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\AboutView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ARPTableAddEntryDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ARPTableView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\AWSProfileDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\AWSSessionManagerConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\AWSSessionManagerHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\AWSSessionManagerSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ConfirmDeleteDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ConnectionsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\CredentialsChangePasswordDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\CredentialsPasswordDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\CredentialsSetPasswordDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\CustomCommandDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DashboardSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DashboardView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DiscoveryProtocolView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DNSLookupHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DNSLookupSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DNSLookupView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DNSServerDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\DropdownDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ExportDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\FirstRunDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\GroupDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\IPAddressAndSubnetmaskDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\IPAddressDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\IPScannerHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\IPScannerSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\IPScannerView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ListenersView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\LookupHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\LookupOUILookupView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\LookupPortLookupView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\NetworkConnectionView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\NetworkInterfaceView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PingMonitorHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PingMonitorSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PingMonitorView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PortProfileDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PortProfilesDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PortScannerHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PortScannerSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PortScannerView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PowerShellConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PowerShellHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PowerShellSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ProfileDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ProfileFileDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\ProfilesView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PuTTYConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PuTTYHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\PuTTYSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\RemoteDesktopConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\RemoteDesktopHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\RemoteDesktopSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsAppearanceView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsAutostartView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsGeneralView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsHotKeysView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsLanguageView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsProfilesView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsStatusView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsUpdateView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SettingsWindowView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SNMPHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SNMPSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SNMPView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SubnetCalculatorCalculatorView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SubnetCalculatorHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SubnetCalculatorSubnettingView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\SubnetCalculatorWideSubnetView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TigerVNCConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TigerVNCHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TigerVNCSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TracerouteHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TracerouteSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\TracerouteView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WakeOnLANSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WakeOnLANView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WebConsoleConnectDialog.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WebConsoleHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WhoisHostView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WhoisSettingsView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WhoisView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\Views\WiFiView.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\App.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\NETworkManager_Content.g.cs" />
+    <Compile Include="E:\NetworkStudio\Source\NETworkManager\obj\Debug\net6.0-windows10.0.17763.0\win10-x64\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\dotnet\sdk\7.0.100\Sdks\Microsoft.NET.Sdk\targets\..\analyzers\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
+    <Analyzer Include="C:\Program Files\dotnet\sdk\7.0.100\Sdks\Microsoft.NET.Sdk\targets\..\analyzers\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\awssdk.ec2\3.7.102.1\analyzers\dotnet\cs\AWSSDK.EC2.CodeAnalysis.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\microsoft.windows.cswinrt\2.0.0\analyzers\dotnet\cs\WinRT.SourceGenerator.dll" />
+    <Analyzer Include="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.11\analyzers/dotnet/cs/System.Text.Json.SourceGeneration.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\analyzers/dotnet/System.Windows.Forms.Analyzers.dll" />
+    <Analyzer Include="C:\Users\tangqi\.nuget\packages\microsoft.windowsdesktop.app.ref\6.0.0\analyzers/dotnet/cs/System.Windows.Forms.Analyzers.CSharp.dll" />
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>
