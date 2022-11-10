@@ -35,8 +35,8 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Grid.Row="0" Width="128" Height="128" Source="/NETworkManager.ico" VerticalAlignment="Center" />
-                <StackPanel Grid.Column="1" Margin="20,0,0,0">
+                <!-- <Image Grid.Column="0" Grid.Row="0" Width="128" Height="128" Source="/NETworkManager.ico" VerticalAlignment="Center" /> -->
+                <!-- <StackPanel Grid.Column="1" Margin="20,0,0,0">
                     <TextBlock FontSize="32" Text="{x:Static resources:Resources.NETworkManager_ProjectName}" Style="{StaticResource HeaderTextBlock}" />
                     <TextBlock Text="{x:Static localization:Strings.Slogan}" Style="{DynamicResource WrapTextBlock}" Margin="0,0,0,5" />
                     <TextBlock Text="{Binding Version}" Style="{StaticResource DefaultTextBlock}" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,0,5" />
@@ -145,9 +145,9 @@
                             </Rectangle>
                         </Button>
                     </StackPanel>                    
-                </StackPanel>                
+                </StackPanel>                 -->
             </Grid>
-            <TextBlock Grid.Row="1" Text="{x:Static localization:Strings.Update}" Style="{StaticResource HeaderTextBlock}"/>
+            <!-- <TextBlock Grid.Row="1" Text="{x:Static localization:Strings.Update}" Style="{StaticResource HeaderTextBlock}"/> -->
             <Grid Grid.Row="2" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
